@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { supabase } from "@/integrations/supabase/client"; // Descomente quando Supabase estiver configurado
+import { supabase } from "@/integrations/supabase/client"; // Descomente quando Supabase estiver configurado
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,7 @@ interface ReportData {
 }
 
 // Email do Lívio - constante para onde os emails serão enviados
-const LIVIO_EMAIL = "livio@universidade.edu"; // Substitua pelo email real do Lívio
+const LIVIO_EMAIL = "hshaggggiiutjj@gmail.com"; // Substitua pelo email real do Lívio
 
 export const VirusReport = () => {
   const [formData, setFormData] = useState<ReportData>({
@@ -55,7 +55,7 @@ export const VirusReport = () => {
 
       // Send email notification via Supabase Edge Function
       // Descomente quando Supabase estiver configurado:
-      /*
+      
       try {
         const { data, error } = await supabase.functions.invoke('send-email', {
           body: {
@@ -73,7 +73,6 @@ export const VirusReport = () => {
       } catch (error) {
         console.error("Erro ao enviar email:", error);
       }
-      */
 
       toast({
         title: "Relatório enviado! 🦠",
