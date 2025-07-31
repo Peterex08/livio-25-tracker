@@ -52,6 +52,18 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Custom virus theme colors
+				virus: {
+					red: 'hsl(var(--virus-red))',
+					orange: 'hsl(var(--virus-orange))',
+					yellow: 'hsl(var(--virus-yellow))'
+				},
+				danger: {
+					bg: 'hsl(var(--danger-bg))'
+				},
+				warning: {
+					bg: 'hsl(var(--warning-bg))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
