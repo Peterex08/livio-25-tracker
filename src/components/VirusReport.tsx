@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "@/../supabase/functions/send-email/index"; // Descomente quando Supabase estiver configurado
+import { supabase } from "@/integration/supabase/client"; // Descomente quando Supabase estiver configurado
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
