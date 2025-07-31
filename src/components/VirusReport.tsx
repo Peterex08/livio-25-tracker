@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import { supabase } from "@/integrations/supabase/client"; // Descomente quando Supabase estiver configurado
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,16 +13,17 @@ interface ReportData {
   course: string;
   symptoms: string;
   date: string;
-  webhookUrl?: string;
 }
+
+// Email do Lívio - constante para onde os emails serão enviados
+const LIVIO_EMAIL = "livio@universidade.edu"; // Substitua pelo email real do Lívio
 
 export const VirusReport = () => {
   const [formData, setFormData] = useState<ReportData>({
     name: "",
     course: "",
     symptoms: "",
-    date: "",
-    webhookUrl: ""
+    date: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -51,25 +53,27 @@ export const VirusReport = () => {
       reports.push(newReport);
       localStorage.setItem("livio25Reports", JSON.stringify(reports));
 
-      // Send to Zapier webhook if provided
-      if (formData.webhookUrl) {
-        try {
-          await fetch(formData.webhookUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            mode: "no-cors",
-            body: JSON.stringify({
-              ...newReport,
-              message: `Nova vítima do Lívio25 reportada: ${formData.name} (${formData.course})`,
-              timestamp: new Date().toISOString(),
-            }),
-          });
-        } catch (error) {
-          console.log("Webhook notification sent");
+      // Send email notification via Supabase Edge Function
+      // Descomente quando Supabase estiver configurado:
+      /*
+      try {
+        const { data, error } = await supabase.functions.invoke('send-email', {
+          body: {
+            to: LIVIO_EMAIL,
+            subject: `🦠 Nova vítima do Lívio25: ${formData.name}`,
+            reportData: newReport
+          }
+        });
+
+        if (error) {
+          console.error("Erro ao enviar email:", error);
+        } else {
+          console.log("Email enviado com sucesso!", data);
         }
+      } catch (error) {
+        console.error("Erro ao enviar email:", error);
       }
+      */
 
       toast({
         title: "Relatório enviado! 🦠",
@@ -81,8 +85,7 @@ export const VirusReport = () => {
         name: "",
         course: "",
         symptoms: "",
-        date: "",
-        webhookUrl: formData.webhookUrl // Keep webhook URL for convenience
+        date: ""
       });
 
       // Dispatch custom event to refresh reports
@@ -171,22 +174,6 @@ export const VirusReport = () => {
                 className="mt-2 min-h-[120px]"
                 required
               />
-            </div>
-
-            <div>
-              <Label htmlFor="webhook" className="text-foreground font-medium">
-                Webhook Zapier (opcional)
-              </Label>
-              <Input
-                id="webhook"
-                value={formData.webhookUrl}
-                onChange={(e) => setFormData({ ...formData, webhookUrl: e.target.value })}
-                placeholder="URL do webhook para receber notificações por email"
-                className="mt-2"
-              />
-              <p className="text-sm text-muted-foreground mt-1">
-                Cole aqui a URL do seu webhook Zapier para receber emails quando alguém reportar
-              </p>
             </div>
 
             <Button 
