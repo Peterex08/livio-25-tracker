@@ -67,7 +67,7 @@ serve(async (req) => {
                 <div class="label">Nome:</div>
                 <div>${reportData.name}</div>
                 
-                <div class="label">Curso:</div>
+                <div class="label">Status da Doença:</div>
                 <div>${reportData.course}</div>
                 
                 <div class="label">Data Infecção:</div>

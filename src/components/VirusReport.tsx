@@ -143,13 +143,13 @@ export const VirusReport = () => {
 
             <div>
               <Label htmlFor="course" className="text-foreground font-medium">
-                Seu curso *
+                Está curado? *
               </Label>
               <Input
                 id="course"
                 value={formData.course}
                 onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                placeholder="Qual seu curso na universidade?"
+                placeholder="Qual seu status de cura da doença?"
                 className="mt-2"
                 required
               />
@@ -170,13 +170,13 @@ export const VirusReport = () => {
 
             <div>
               <Label htmlFor="symptoms" className="text-foreground font-medium">
-                Descreva seus "sintomas" *
+                Descreva seus "sintomas" Liviais *
               </Label>
               <Textarea
                 id="symptoms"
                 value={formData.symptoms}
                 onChange={(e) => setFormData({ ...formData, symptoms: e.target.value })}
-                placeholder="Como foi sua experiência? O que aconteceu quando foi infectado pelo Lívio25?"
+                placeholder="Como foi sua experiência? Diga de forma bem carinhosa pro Lívio ler! (não ser carinhoso)"
                 className="mt-2 min-h-[120px]"
                 required
               />
