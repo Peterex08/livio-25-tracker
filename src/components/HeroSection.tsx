@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Zap, AlertTriangle, TrendingUp } from "lucide-react";
+import doenca from "@/../public/doença.jpg"
 
 export const HeroSection = () => {
   const scrollToReport = () => {
@@ -22,6 +23,14 @@ export const HeroSection = () => {
               <AlertTriangle className="h-8 w-8 text-virus-yellow animate-bounce" />
             </div>
           </div>
+        </div>
+
+        <div className="w-1/2">
+          <img 
+            src= {doenca}
+            alt="Doente do Lívio25" 
+            className="w-full h-auto" 
+          />
         </div>
 
         {/* Main Heading */}
