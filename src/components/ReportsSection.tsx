@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Calendar, GraduationCap } from "lucide-react";
+import { supabase } from "@/integration/supabase/client.ts";
 
 interface Report {
   id: number;
@@ -15,10 +16,20 @@ interface Report {
 export const ReportsSection = () => {
   const [reports, setReports] = useState<Report[]>([]);
 
-  const loadReports = () => {
-    const storedReports = JSON.parse(localStorage.getItem("livio25Reports") || "[]");
-    setReports(storedReports.reverse()); // Show newest first
-  };
+  const loadReports = async () => {
+  // Busca os relatos da tabela 'reports', ordenando pelos mais recentes
+  const { data: storedReports, error } = await supabase
+    .from('reports') // Use o nome da sua tabela aqui
+    .select('*')
+    .order('reportDate', { ascending: false });
+
+  if (error) {
+    console.error("Erro ao buscar relatos:", error);
+    return;
+  }
+
+  setReports(storedReports || []);
+};
 
   useEffect(() => {
     loadReports();

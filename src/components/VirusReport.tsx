@@ -43,15 +43,22 @@ export const VirusReport = () => {
     setIsSubmitting(true);
 
     try {
-      // Store the report data in localStorage for now
-      const reports = JSON.parse(localStorage.getItem("livio25Reports") || "[]");
       const newReport = {
         ...formData,
-        id: Date.now(),
+        // Garante que a data está no formato correto e que campos vazios são nulos
+        date: formData.date || null,
         reportDate: new Date().toISOString()
       };
-      reports.push(newReport);
-      localStorage.setItem("livio25Reports", JSON.stringify(reports));
+
+      // 1. Salva o relato no banco de dados
+      const { error: insertError } = await supabase
+        .from('reports') // Use o nome da sua tabela aqui
+        .insert([newReport]);
+
+      if (insertError) {
+        console.error("Erro ao salvar no banco:", insertError);
+        throw new Error("Falha ao salvar o relato.");
+      }
 
       // Send email notification via Supabase Edge Function
       // Descomente quando Supabase estiver configurado:
