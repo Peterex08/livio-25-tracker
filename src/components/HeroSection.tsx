@@ -12,7 +12,7 @@ export const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-danger-bg via-background to-warning-bg">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-4xl mt-6 mx-auto text-center">
         {/* Virus Icon Animation */}
         <div className="flex justify-center mb-8">
           <div className="relative">
@@ -25,12 +25,14 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        <div className="w-1/2">
-          <img 
-            src= {doenca}
-            alt="Doente do Lívio25" 
-            className="w-full h-auto" 
-          />
+        <div className="flex justify-center">
+          <div className="w-1/2 p-4 border rounded-lg shadow-md">
+            <img 
+              src= {doenca}
+              alt="Doente do Lívio25" 
+              className="w-full h-auto" 
+            />
+          </div>
         </div>
 
         {/* Main Heading */}
