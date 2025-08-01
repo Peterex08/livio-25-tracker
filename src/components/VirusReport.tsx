@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "@/integration/supabase/client"; // Descomente quando Supabase estiver configurado
+import { supabase } from "@/integrations/supabase/client"; // Descomente quando Supabase estiver configurado
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -47,7 +47,7 @@ export const VirusReport = () => {
         ...formData,
         // Garante que a data está no formato correto e que campos vazios são nulos
         date: formData.date || null,
-        reportDate: new Date().toISOString()
+        reportdate: new Date().toISOString()
       };
 
       // 1. Salva o relato no banco de dados

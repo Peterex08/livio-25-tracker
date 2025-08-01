@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Calendar, GraduationCap } from "lucide-react";
-import { supabase } from "@/integration/supabase/client.ts";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Report {
-  id: number;
+  id: string;
   name: string;
   course: string;
   symptoms: string;
   date: string;
-  reportDate: string;
+  reportdate: string;
 }
 
 export const ReportsSection = () => {
@@ -21,7 +21,7 @@ export const ReportsSection = () => {
   const { data: storedReports, error } = await supabase
     .from('reports') // Use o nome da sua tabela aqui
     .select('*')
-    .order('reportDate', { ascending: false });
+    .order('reportdate', { ascending: false });
 
   if (error) {
     console.error("Erro ao buscar relatos:", error);
@@ -113,8 +113,8 @@ export const ReportsSection = () => {
                 </div>
 
                 <div className="text-xs text-muted-foreground">
-                  Reportado em {new Date(report.reportDate).toLocaleDateString('pt-BR')} às{' '}
-                  {new Date(report.reportDate).toLocaleTimeString('pt-BR', { 
+                  Reportado em {new Date(report.reportdate).toLocaleDateString('pt-BR')} às{' '}
+                  {new Date(report.reportdate).toLocaleTimeString('pt-BR', { 
                     hour: '2-digit', 
                     minute: '2-digit' 
                   })}
