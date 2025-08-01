@@ -25,13 +25,12 @@ serve(async (req) => {
   try {
     const { to, subject, reportData }: EmailRequest = await req.json()
 
-    // Configurações SMTP do MailerSend
-    const smtpConfig = {
-      host: 'smtp.mailersend.net',
-      port: 587,
-      username: 'MS_znZf49@test-86org8end8kgew13.mlsender.net',
-      password: 'mssp.FyvFbZB.pxkjn4139y5gz781.mAIKpWO',
-      from: 'Livio25 <MS_znZf49@test-86org8end8kgew13.mlsender.net>'
+    // Configurações do MailerSend usando secrets
+    const mailerSendApiKey = Deno.env.get('MAILERSEND_API_KEY')
+    const fromEmail = 'MS_znZf49@test-86org8end8kgew13.mlsender.net' // Substitua pelo seu email verificado no MailerSend
+    
+    if (!mailerSendApiKey) {
+      throw new Error('MAILERSEND_API_KEY não configurada')
     }
 
     // HTML template para o email
@@ -92,10 +91,10 @@ serve(async (req) => {
       </html>
     `
 
-    // Enviar email usando MailerSend SMTP
+    // Enviar email usando MailerSend API
     const emailData = {
       from: {
-        email: smtpConfig.username,
+        email: fromEmail,
         name: "Sistema Lívio25"
       },
       to: [{
@@ -109,7 +108,7 @@ serve(async (req) => {
     const response = await fetch('https://api.mailersend.com/v1/email', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${smtpConfig.password}`,
+        'Authorization': `Bearer ${mailerSendApiKey}`,
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
       },
