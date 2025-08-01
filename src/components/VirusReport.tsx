@@ -16,7 +16,7 @@ interface ReportData {
 }
 
 // Email do Lívio - constante para onde os emails serão enviados
-const LIVIO_EMAIL = "mendonca.livio@gmail.com"; // Substitua pelo email real do Lívio
+const LIVIO_EMAIL = "pedrohafonso08@hotmail.com"; // Substitua pelo email real do Lívio
 
 export const VirusReport = () => {
   const [formData, setFormData] = useState<ReportData>({
